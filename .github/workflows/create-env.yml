@@ -1,0 +1,11 @@
+name: create-env
+on: push
+jobs:
+    run-env-sh:
+        runs-on: ubuntu-latest
+        steps:
+            - name: run-script
+              run: |
+                echo "Creating Python Virtual Environment"
+                /scripts/build-venv.sh
+    
