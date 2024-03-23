@@ -1,11 +1,17 @@
-name: create-env
+name: create-virtual-py-env
 on: push
 jobs:
     run-env-sh:
         runs-on: ubuntu-latest
         steps:
+            - name: get-code
+              run: |
+                echo $pwd
+                echo $ls
+                git clone https://github.com/NeilBardhan/actions-cicd.git
+                echo $ls
             - name: run-script
               run: |
                 echo "Creating Python Virtual Environment"
+                echo $pwd
                 /scripts/build-venv.sh
-    
