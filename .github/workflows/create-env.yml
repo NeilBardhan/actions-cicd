@@ -11,7 +11,7 @@ jobs:
             - name: run-script
               run: |
                 echo "Creating Python Virtual Environment"
-                # cd actions-cicd
+                cd actions-cicd
                 echo $GITHUB_WORKSPACE
                 ls
                 chmod +x scripts/build-venv.sh
