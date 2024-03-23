@@ -1,0 +1,22 @@
+name: second-workflow
+on: 
+    workflow_run:
+        workflows: ["first-workflow"]
+        types: [completed]
+jobs:
+    first-job:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        steps:
+            - name: print-status-success
+              run: |
+                echo "First workflow was a success"
+                date
+    second-job:
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+        steps:
+            - name: print-status-failure
+              run: |
+                echo "First workflow was a failure"
+                date
