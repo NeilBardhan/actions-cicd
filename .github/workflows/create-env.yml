@@ -12,7 +12,9 @@ jobs:
               run: |
                 echo "Creating Python Virtual Environment"
                 cd actions-cicd
+                echo $GITHUB_HEAD_REF
                 echo $GITHUB_WORKSPACE
+                echo ${GITHUB_REF##*/}
                 ls
                 chmod +x scripts/build-venv.sh
                 scripts/build-venv.sh
