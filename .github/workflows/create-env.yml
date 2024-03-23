@@ -6,13 +6,12 @@ jobs:
         steps:
             - name: get-code
               run: |
-                ${{ github.workspace }}
                 echo $ls
                 git clone https://github.com/NeilBardhan/actions-cicd.git
                 echo $ls
-                cd actions-cicd
             - name: run-script
               run: |
                 echo "Creating Python Virtual Environment"
-                ${{ github.workspace }}
-                ./scripts/build-venv.sh
+                cd actions-cicd
+                chmod +x /scripts/build-venv.sh
+                /scripts/build-venv.sh
