@@ -25,20 +25,20 @@ For the first workflow, let's use the GitHub web UI.
   4. **Each workflow must have a name**. Using the `name` keyword, we can give the workflow a name.
 
 ```yml
-name: First Workflow
+name: first-workflow
 ```
 
   5. Then we must define, **when the workflow should be executed**. This is done by adding the `on` key, which defines the event or events that should trigger this workflow. In the example below, I use `workflow_dispatch` event which makes sure that a user can manually trigger this workflow. **This is an event that waits for the user  to manually start this workflow**. GitHub Actions defines many events of varying complexity and automation.
 
 ```yml
-name: First Workflow
+name: first-workflow
 on: workflow_dispatch
 ```
 
   6. Now we have to define, the actual **work that this workflow does** and for this we need the `jobs` key. A job **must have a name** and we must define the **runner** which is the environment in which the job will be executed. GitHub Actions provides a wide variety of runners and this is identified with the `runs-on` key.
 
 ```yml
-name: First Workflow
+name: first-workflow
 on: workflow_dispatch
 jobs:
   first-job:
