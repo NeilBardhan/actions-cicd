@@ -7,7 +7,10 @@ jobs:
             - name: get-code
               uses: actions/checkout@v4
               with:
-                ref: ${GITHUB_REF##*/}
+                fetch-depth: 2
+            - run: |
+                git checkout HEAD^
+                git status
             - name: build
               run : |
                 echo $GITHUB_WORKSPACE
