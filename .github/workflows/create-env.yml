@@ -20,5 +20,5 @@ jobs:
                 ls
                 chmod +x scripts/build-venv.sh
                 scripts/build-venv.sh
-                pytest
+                python -m pytest
 
