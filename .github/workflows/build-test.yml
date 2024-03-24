@@ -1,0 +1,14 @@
+name: build-test
+on: push
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get-code
+              uses: actions/checkout@v4
+              with:
+                ref: ${GITHUB_REF##*/}
+            - name: build
+              run : |
+                echo $GITHUB_WORKSPACE
+                ls
