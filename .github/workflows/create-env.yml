@@ -1,0 +1,31 @@
+name: create-virtual-py-env
+on: push
+jobs:
+    run-env-sh:
+        runs-on: ubuntu-latest
+        steps:
+            # - name: get-code-action
+            #   uses: actions/checkout@v3
+            #   with:
+            #     ref: ${GITHUB_REF##*/}
+            - name: get-code-manual
+              run: |
+                echo $GITHUB_WORKSPACE
+                git clone https://github.com/NeilBardhan/actions-cicd.git
+            - name: run-script
+              run: |
+                echo "Creating Python Virtual Environment"
+                cd actions-cicd
+                git checkout ${GITHUB_REF##*/}
+                # ls
+                # chmod +x scripts/build-venv.sh
+                # scripts/build-venv.sh
+                # pip list
+                /usr/bin/python3 -m pip install virtualenv
+                /usr/bin/python3 -m virtualenv venv
+                source venv/bin/activate
+                pip install -e .
+                pip install -r requirements.txt
+                pytest
+
+
