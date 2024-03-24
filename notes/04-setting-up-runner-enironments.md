@@ -43,3 +43,9 @@ jobs:
           with: 
             ref: ... #define branch here
 ```
+
+## Setting up a python environment
+
+`ubuntu-latest` comes pre-installed with `python3`, but we can leverage shell scripts to set up our coding environment as we want to. For example, this `build-venv.sh` file [here](https://github.com/NeilBardhan/actions-cicd/tree/main/scripts/build-venv.sh) installs the `virtualenv` library, then uses it to create a virtual environment in which we install our python package as defined in our `actions-cicd` repo and finally we install our package dependencies as defined in our `requirements.txt`.
+
+We can invoke `build-venv.sh` as a script from our workflow as is illustrated in the `run_script` job [here]().
