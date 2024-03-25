@@ -1,5 +1,5 @@
 name: build-test
-on: push
+on: [push, workflow_dispatch]
 jobs:
     build:
         needs: test
