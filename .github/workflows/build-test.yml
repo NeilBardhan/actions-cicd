@@ -2,6 +2,7 @@ name: build-test
 on: push
 jobs:
     build:
+        needs: test
         runs-on: ubuntu-latest
         steps:
             - name: get-code-action
