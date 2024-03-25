@@ -1,5 +1,5 @@
 name: create-virtual-py-env
-on: push
+on: workflow_dispatch
 jobs:
     run-env-sh:
         runs-on: ubuntu-latest
@@ -23,5 +23,3 @@ jobs:
                 pip install -e .
                 pip install -r requirements.txt
                 pytest
-
-
