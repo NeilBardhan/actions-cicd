@@ -1,0 +1,41 @@
+name: build-test
+on: push
+jobs:
+    build:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: get-code-action
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 2
+            - run: |
+                git checkout HEAD^
+            - name: build
+              run : |
+                echo $GITHUB_WORKSPACE
+                ls
+                /usr/bin/python3 -m pip install virtualenv
+                /usr/bin/python3 -m virtualenv venv
+                source venv/bin/activate
+                pip install -e .
+                pip install -r requirements.txt
+                python -m build --sdist
+                python -m build --wheel
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get-code-action
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 2
+            - run: |
+                git checkout HEAD^
+            - name: test
+              run: |
+                /usr/bin/python3 -m pip install virtualenv
+                /usr/bin/python3 -m virtualenv venv
+                source venv/bin/activate
+                pip install -e .
+                pip install -r requirements.txt
+                pytest

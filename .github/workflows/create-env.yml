@@ -1,13 +1,9 @@
 name: create-virtual-py-env
-on: push
+on: workflow_dispatch
 jobs:
     run-env-sh:
         runs-on: ubuntu-latest
         steps:
-            # - name: get-code-action
-            #   uses: actions/checkout@v3
-            #   with:
-            #     ref: ${GITHUB_REF##*/}
             - name: get-code-manual
               run: |
                 echo $GITHUB_WORKSPACE
@@ -27,5 +23,3 @@ jobs:
                 pip install -e .
                 pip install -r requirements.txt
                 pytest
-
-
