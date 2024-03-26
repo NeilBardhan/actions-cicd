@@ -9,5 +9,5 @@ jobs:
               env:
                 GITHUB_CONTEXT: ${{ toJSON(github) }}
             - run: |
-                ESCAPED_CONTEXT=$(echo "${{ toJSON(github) }}" | base64 --decode | sed 's/"/\\"/g')
-                echo "$ESCAPED_CONTEXT"
+                # ESCAPED_CONTEXT=$(echo "${{ toJSON(github) }}" | base64 --decode | sed 's/"/\\"/g')
+                echo "$GITHUB_CONTEXT"
