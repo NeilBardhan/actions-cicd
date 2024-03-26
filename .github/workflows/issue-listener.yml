@@ -8,4 +8,6 @@ jobs:
               uses: actions/checkout@v4
               env:
                 GITHUB_CONTEXT: ${{ toJSON(github) }}
-            - run: echo $GITHUB_CONTEXT
+            - run: |
+                ESCAPED_CONTEXT=$(echo "${{ toJSON(github) }}" | sed "s/'/\\\'/g")
+                echo "$ESCAPED_CONTEXT"
