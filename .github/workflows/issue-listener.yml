@@ -7,4 +7,4 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
             - run: |
-                echo "${{ toJSON(github) }}"
+                echo ${{toJSON(github)}}
