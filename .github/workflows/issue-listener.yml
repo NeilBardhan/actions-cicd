@@ -1,0 +1,10 @@
+name: issue-listener
+on: [issues,workflow_dispatch]
+jobs:
+    issues-logger:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get-code-action
+              uses: actions/checkout@v4
+            - run: |
+                echo "${{ toJSON(github) }}"
