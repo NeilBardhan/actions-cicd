@@ -6,4 +6,6 @@ jobs:
         steps:
             - name: get-code-action
               uses: actions/checkout@v4
-            - run: echo "${{ toJSON(github) }}"
+              env:
+                GITHUB_CONTEXT: ${{ toJSON(github) }}
+            - run: echo $GITHUB_CONTEXT
