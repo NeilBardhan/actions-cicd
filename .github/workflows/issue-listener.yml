@@ -1,5 +1,5 @@
 name: issue-listener
-on: [push, workflow_dispatch, issues]
+on: [workflow_dispatch]
 jobs:
     issues-logger:
         runs-on: ubuntu-latest
