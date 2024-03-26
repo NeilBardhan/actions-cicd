@@ -1,0 +1,12 @@
+name: issue-listener
+on: [workflow_dispatch]
+jobs:
+    issues-logger:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get-code-action
+              uses: actions/checkout@v4
+              env:
+                GH_CONTEXT: ${{ toJSON(github) }}
+            - run: |
+                echo "$GH_CONTEXT"
