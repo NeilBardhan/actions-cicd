@@ -7,7 +7,6 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
               env:
-                GITHUB_CONTEXT: ${{ toJSON(github) }}
+                GH_CONTEXT: ${{ toJSON(github) }}
             - run: |
-                # ESCAPED_CONTEXT=$(echo "${{ toJSON(github) }}" | base64 --decode | sed 's/"/\\"/g')
-                echo "$GITHUB_CONTEXT"
+                echo "$GH_CONTEXT"
