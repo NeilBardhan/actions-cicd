@@ -7,7 +7,8 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
             - run: |
-                echo "${{ github.event }}" 
+                toJSON(github.event) }}" > event_context.json
+                cat event_context.json
 ###Double quotes are used for variable expansion, 
 ###meaning that the shell interprets and substitutes 
 ###the values of variables enclosed within the quotes. 
