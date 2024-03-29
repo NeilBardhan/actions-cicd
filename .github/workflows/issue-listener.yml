@@ -7,7 +7,7 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
             - run: |
-                echo "${{ github }}"
+                echo "${{ github.ref }}"
 # ESCAPED_CONTEXT=$( 
                 
 # echo "$ESCAPED_CONTEXT"
