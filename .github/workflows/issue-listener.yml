@@ -1,12 +1,20 @@
 name: issue-listener
-on: [workflow_dispatch]
+on: [workflow_dispatch, issues]
 jobs:
     issues-logger:
         runs-on: ubuntu-latest
         steps:
             - name: get-code-action
               uses: actions/checkout@v4
-              env:
-                GH_CONTEXT: ${{ toJSON(github) }}
             - run: |
-                echo "$GH_CONTEXT"
+                echo "${{ github.event }}" 
+###Double quotes are used for variable expansion, 
+###meaning that the shell interprets and substitutes 
+###the values of variables enclosed within the quotes. 
+###However, if you want to include the actual 
+###double quote character in the string without triggering 
+###variable expansion, you use the backslash (\) to escape it.
+
+###Since echo is having trouble with printing out the context,
+###try piping that context json to a file and then printing or
+###saving that file.
