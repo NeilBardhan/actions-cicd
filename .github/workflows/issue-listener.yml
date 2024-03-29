@@ -7,7 +7,12 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
             - run: |
-                echo "${{ github.event }}" 
+                echo "${{ toJSON(github.ref) }}"
+                echo "${{ github.repository.open_issues_count }}"
+# ESCAPED_CONTEXT=$( 
+                
+# echo "$ESCAPED_CONTEXT"
+
 ###Double quotes are used for variable expansion, 
 ###meaning that the shell interprets and substitutes 
 ###the values of variables enclosed within the quotes. 
