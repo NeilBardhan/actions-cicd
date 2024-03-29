@@ -6,10 +6,8 @@ jobs:
         steps:
             - name: get-code-action
               uses: actions/checkout@v4
-              env:
-                GH_CONTEXT: ${{ toJSON(github.event) }}
             - run: |
-                echo "$GH_CONTEXT" 
+                echo "${{ github.event }}" 
 ###Double quotes are used for variable expansion, 
 ###meaning that the shell interprets and substitutes 
 ###the values of variables enclosed within the quotes. 
