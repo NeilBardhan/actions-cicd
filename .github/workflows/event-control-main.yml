@@ -1,0 +1,11 @@
+name: event-control-main
+on:
+    pull_request:
+        types: opened
+    workflow_dispatch:
+jobs:
+    echo-event:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Output event data
+            run: echo "${{ toJSON(github.event) }}"
