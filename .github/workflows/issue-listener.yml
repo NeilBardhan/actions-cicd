@@ -7,7 +7,7 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
             - run: |
-                ESCAPED_CONTEXT=$(echo "${{ github.event }}" | base64 --decode | sed 's/"/\\"/g')
+                ESCAPED_CONTEXT=$(echo "${{ github.event }}")
                 echo "$ESCAPED_CONTEXT" > event_context.txt
 
 ###Double quotes are used for variable expansion, 
