@@ -1,12 +1,11 @@
 name: event-control-main
 on:
-    workflow_dispatch:
     pull_request:
         types: [opened, closed] ## this activity type means when a PR is opened or closed, this workflow will be run
     push:
         branches: ## This is an event filter
           - main ## This will ensure the workflow only runs on pushes ot the main branch
-          - '*-workflows-*' ## This workflow will run when a commit is pushed to any branch that has the text "-workflows-" in it's name
+          - '*-workflows*' ## This workflow will run when a commit is pushed to any branch that has the text "-workflows-" in it's name
 jobs:
     echo-event:
         runs-on: ubuntu-latest
