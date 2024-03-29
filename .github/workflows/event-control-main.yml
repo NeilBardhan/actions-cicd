@@ -1,8 +1,8 @@
 name: event-control-main
 on:
+    workflow_dispatch:
     pull_request:
         types: [opened, closed] ## this activity type means when a PR is opened or closed, this workflow will be run
-    workflow_dispatch:
 jobs:
     echo-event:
         runs-on: ubuntu-latest
