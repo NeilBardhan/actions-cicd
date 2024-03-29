@@ -1,11 +1,13 @@
 name: event-control-main
 on:
     pull_request:
-        types: opened
+        types: [opened, closed] ## this activity type means when a PR is opened or closed, this workflow will be run
     workflow_dispatch:
 jobs:
     echo-event:
         runs-on: ubuntu-latest
         steps:
           - name: Output event data
-            run: echo "${{ toJSON(github.event) }}"
+            run: |
+              echo "${{ toJSON(github.event) }}" > event_context.json
+              cat event_context.json
