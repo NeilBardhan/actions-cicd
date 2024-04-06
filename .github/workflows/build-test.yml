@@ -22,6 +22,14 @@ jobs:
                 pip install -r requirements.txt
                 python -m build --sdist
                 python -m build --wheel
+                ls -al
+            - name: upload-artifacts
+              uses: actions/upload-artifact
+              with:
+                name: build-dist-files
+                path: |
+                  dist
+                  package.json
     test:
         runs-on: ubuntu-latest
         steps:
@@ -38,4 +46,6 @@ jobs:
                 source venv/bin/activate
                 pip install -e .
                 pip install -r requirements.txt
-                pytest
+                pytest --cov=demo_py_pkg
+                ls -al
+                # coverage xml
