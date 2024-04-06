@@ -8,3 +8,4 @@ eggs/
 *.egg
 __pycache__/
 .pytest_cache/
+artifacts/
