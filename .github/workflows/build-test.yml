@@ -50,3 +50,13 @@ jobs:
               with:
                 name: test-cov-files
                 path: htmlcov
+    publish:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: get-build-artifacts
+          uses: actions/download-artifact@v4
+          with:
+            name: build-dist-files
+        - name: folder-contents
+          run: ls -al
