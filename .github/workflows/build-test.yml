@@ -43,7 +43,9 @@ jobs:
             #     git checkout HEAD^
             - name: test
               run: |
-                make venv
+                /usr/bin/python3 -m pip install virtualenv
+                /usr/bin/python3 -m virtualenv venv
+                source venv/bin/activate
                 make install
                 make test
                 coverage html
