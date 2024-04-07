@@ -17,7 +17,7 @@ jobs:
             - name: build
               run : |
                 echo $GITHUB_WORKSPACE
-                ls
+                ls -al
                 make venv
                 make install
                 make build
@@ -43,6 +43,8 @@ jobs:
             #     git checkout HEAD^
             - name: test
               run: |
+                echo $GITHUB_WORKSPACE
+                ls -al
                 /usr/bin/python3 -m pip install virtualenv
                 /usr/bin/python3 -m virtualenv venv
                 source venv/bin/activate
