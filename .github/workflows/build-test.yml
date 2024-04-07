@@ -10,20 +10,16 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
               with:
-                fetch-depth: 2
-            - run: |
-                git checkout HEAD^
+                ref: ${{ github.ref }}
+                fetch-depth: 0
+            # - run: |
+            #     git checkout HEAD^
             - name: build
               run : |
                 echo $GITHUB_WORKSPACE
-                ls
-                /usr/bin/python3 -m pip install virtualenv
-                /usr/bin/python3 -m virtualenv venv
-                source venv/bin/activate
-                pip install -e .
-                pip install -r requirements.txt
-                python -m build --sdist
-                python -m build --wheel
+                make venv
+                make install
+                make build
             ## Job outputs name of .whl
             - name: output-filename
               id: ouput-wheel-filename
@@ -40,16 +36,14 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
               with:
-                fetch-depth: 2
-            - run: |
-                git checkout HEAD^
+                ref: ${{ github.ref }}
+                fetch-depth: 0
+            # - run: |
+            #     git checkout HEAD^
             - name: test
               run: |
-                /usr/bin/python3 -m pip install virtualenv
-                /usr/bin/python3 -m virtualenv venv
-                source venv/bin/activate
-                pip install -e .
-                pip install -r requirements.txt
+                make venv
+                make install
                 make test
                 coverage html
             - name: upload-artifacts
