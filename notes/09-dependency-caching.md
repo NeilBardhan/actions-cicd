@@ -9,4 +9,4 @@ Reducing the workflow duration is key to -
   - Reducing compute costs
   - Deploying faster.
 
-A great way to speed up the process is to **cache the dependencies**. Fortunately GitHub Actions provides an action called [`cache`](github.com/actions/cache)
+A great way to speed up the process is to **cache the dependencies**. Fortunately GitHub Actions provides an action called [`cache`](https://github.com/actions/cache)
