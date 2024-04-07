@@ -4,6 +4,8 @@ jobs:
     build:
         needs: test
         runs-on: ubuntu-latest
+        outputs:
+          whl-file-name: ${{ steps.ouput-wheel-filename.outputs.wheel-filename }} ## What the name of the output will be
         steps:
             - name: get-code-action
               uses: actions/checkout@v4
@@ -22,6 +24,16 @@ jobs:
                 pip install -r requirements.txt
                 python -m build --sdist
                 python -m build --wheel
+            ## Job outputs name of .whl
+            - name: output-filename
+              id: ouput-wheel-filename
+              run: find dist/*.whl -type f -execdir echo 'wheel-filename={}' >> $GITHUB_OUTPUT ';'
+            ## Artifacts 
+            - name: upload-artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: build-dist-files
+                path: dist
     test:
         runs-on: ubuntu-latest
         steps:
@@ -38,4 +50,22 @@ jobs:
                 source venv/bin/activate
                 pip install -e .
                 pip install -r requirements.txt
-                pytest
+                make test
+                coverage html
+            - name: upload-artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: test-cov-files
+                path: htmlcov
+    publish:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: get-build-artifacts
+          uses: actions/download-artifact@v4
+          with:
+            name: build-dist-files
+        - name: output-wheel-filename
+          run: echo "${{ needs.build.outputs.whl-file-name }}"
+        - name: folder-contents
+          run: ls -al

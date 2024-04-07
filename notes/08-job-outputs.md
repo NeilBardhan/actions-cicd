@@ -1,0 +1,3 @@
+# Job Outputs
+
+Job **outputs** are different from job **artifacts**. Artifacts are files/folders that are typically used for sharing to downstream jobs or for hosting in 3rd party spaces, for example, publish a `.whl` artifact wheel built by the `build` job to Artifactory or pypi in the `publish` job. **Job outputs** are **simple values** produced by a job to serve as a parameter for a subsequent job. **Job outputs are intended to be reused as a value in subsequent jobs.** They serve as a way of passing information between jobs. For example, if we generate a file in one job, we may need to pass the **name** of that file to subsequent jobs. This is where job outputs come in handy.
