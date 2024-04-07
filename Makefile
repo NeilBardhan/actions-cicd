@@ -10,8 +10,7 @@ pytest_cache := $(shell find . -type d -name "pytest_cache" || :)
 venv: ## Create and activate virtual environment
 	/usr/bin/python3 -m pip install virtualenv
 	/usr/bin/python3 -m virtualenv venv
-	pwd && ls -al
-	venv/bin/activate
+	. venv/bin/activate
 
 .PHONY: install
 install: ## Install this package and it's dependencies into the current environment
