@@ -10,9 +10,10 @@ jobs:
             - name: get-code-action
               uses: actions/checkout@v4
               with:
-                fetch-depth: 2
-            - run: |
-                git checkout HEAD^
+                ref: ${{ github.ref }}
+                fetch-depth: 0
+            # - run: |
+            #     git checkout HEAD^
             - name: build
               run : |
                 echo $GITHUB_WORKSPACE
