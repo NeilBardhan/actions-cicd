@@ -22,8 +22,7 @@ jobs:
                 /usr/bin/python3 -m virtualenv venv
                 source venv/bin/activate
                 make install
-                python -m build --sdist
-                python -m build --wheel
+                make build
             ## Job outputs name of .whl
             - name: output-filename
               id: ouput-wheel-filename

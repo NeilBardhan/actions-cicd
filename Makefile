@@ -14,3 +14,8 @@ install: ## Install this package and it's dependencies into the current environm
 .PHONY: test
 test: ## Run unit tests
 	pytest --cov=demo_py_pkg
+
+.PHONY: build
+build: ## Build python package
+	python -m build --sdist
+	python -m build --wheel
