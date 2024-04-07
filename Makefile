@@ -6,6 +6,12 @@ test_src := $(shell find $(test_dir) -type f -name "*.py" || :)
 pycache := $(shell find . -type d -name "__pycache__" || :)
 pytest_cache := $(shell find . -type d -name "pytest_cache" || :)
 
+.PHONY: venv
+venv: ## Create and activate virtual environment
+	/usr/bin/python3 -m pip install virtualenv
+	/usr/bin/python3 -m virtualenv venv
+	source venv/bin/activate
+
 .PHONY: install
 install: ## Install this package and it's dependencies into the current environment
 	pip install -e .
