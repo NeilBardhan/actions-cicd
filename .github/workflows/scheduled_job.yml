@@ -1,4 +1,4 @@
-name: "Run on a schedule"
+name: "run-script-on-schedule"
 on:
     schedule:
         - cron: "*/5 * * * *"
@@ -15,4 +15,10 @@ jobs:
               run: |
                 make venv
                 make install
+                chmod +x scripts/python-runner.sh
                 ./scripts/python-runner.sh
+            - name: remove-scheduled-job
+              uses: cardinalby/unschedule-job-action@v1
+              if: github.run_number > 10
+              with:
+                ghToken: ${{ secrets.WORKFLOWS_TOKEN }} 
