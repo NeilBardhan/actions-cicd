@@ -17,3 +17,8 @@ jobs:
                 make install
                 chmod +x scripts/python-runner.sh
                 ./scripts/python-runner.sh
+            - name: remove-scheduled-job
+              uses: cardinalby/unschedule-job-action@v1
+              if: github.run_number > 10
+              with:
+                ghToken: ${{ secrets.WORKFLOWS_TOKEN }} 
