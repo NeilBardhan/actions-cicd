@@ -16,4 +16,10 @@ jobs:
                 make venv
                 make install
                 ./scripts/python-runner.sh
+            - name: remove-job-if-failed-10-times
+              uses: cardinalby/unschedule-job-action@v1
+              if: github.run_number > 10
+              with:
+                ghToken: ${{ secrets.WORKFLOWS_TOKEN }}
+
                 
