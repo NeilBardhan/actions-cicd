@@ -1,0 +1,19 @@
+name: "Run on a schedule"
+on:
+    schedule:
+        - cron: "*/5 * * * *"
+jobs:
+    scheduled-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get-code-action
+              uses: actions/checkout@v4
+              with:
+                ref: ${{ github.ref }}
+                fetch-depth: 0
+            - name: run-python
+              run: |
+                make venv
+                make install
+                ./scripts/python-runner.sh
+                

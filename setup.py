@@ -2,7 +2,8 @@ from setuptools import setup, find_namespace_packages
 
 install_requirements = [
     'build',
-    'numpy'
+    'numpy',
+    'requests'
 ]
 
 test_requirements = [
