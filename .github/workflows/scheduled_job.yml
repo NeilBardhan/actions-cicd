@@ -15,5 +15,12 @@ jobs:
               run: |
                 make venv
                 make install
+                SUFFIX=$(date '+%m%d%Y%H%M')
+                FILENAME="log-$suffix.txt"
                 chmod u+x scripts/python-runner.sh
-                ./scripts/python-runner.sh
+                ./scripts/python-runner.sh > $FILENAME
+            - name: upload-artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: scheduled-log-files
+                path: $FILENAME
