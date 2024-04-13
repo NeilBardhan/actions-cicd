@@ -15,4 +15,5 @@ jobs:
               run: |
                 make venv
                 make install
+                chmod +x scripts/python-runner.sh
                 ./scripts/python-runner.sh
