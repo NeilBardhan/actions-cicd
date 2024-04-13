@@ -68,8 +68,9 @@ jobs:
           run: echo "${{ needs.build.outputs.whl-file-name }}"
         - name: folder-contents
           run: ls -al
-        - name: schedule-delayed-job
-          uses: cardinalby/schedule-job-action@v1
-          with:
-            ghToken: ${{ secrets.WORKFLOWS_TOKEN }}
-            templateYmlFile: '.github-scheduled-workflows/scheduled_job.yml'
+        # - name: schedule-delayed-job
+        #   uses: cardinalby/schedule-job-action@v1
+        #   with:
+        #     ghToken: ${{ secrets.WORKFLOWS_TOKEN }
+        #     templateYmlFile: '.github-scheduled-workflows/scheduled_job.yml'
+        #     targetBranch: main
