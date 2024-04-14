@@ -1,10 +1,11 @@
 name: "run-script-on-schedule"
-on:
-    schedule:
-        - cron: "*/5 * * * *"
+on: workflow_dispatch
+    # schedule:
+    #     - cron: "*/10 * * * *"
 jobs:
     scheduled-job:
         runs-on: ubuntu-latest
+        timeout-minutes: 120
         steps:
             - name: get-code-action
               uses: actions/checkout@v4
@@ -16,7 +17,7 @@ jobs:
                 make venv
                 make install
                 SUFFIX=$(date '+%m%d%Y%H%M')
-                FILENAME="log-$suffix.txt" && mkdir artifacts
+                FILENAME="log-$SUFFIX.txt" && mkdir artifacts
                 chmod u+x scripts/python-runner.sh
                 ./scripts/python-runner.sh > artifacts/$FILENAME
             - name: upload-artifacts
