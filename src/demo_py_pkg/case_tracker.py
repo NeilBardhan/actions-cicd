@@ -2,15 +2,7 @@ import os
 import json
 import requests
 from pprint import pprint
-
-
-APP_NAME = "tracker_gc"
-CONSUMER_KEY = "WgeOV3lfT4TfOcXeVCcyAMelQyyA21gf"
-CONSUMER_KEY_SECRET = "DOnHJk3ezOru5EOm"
-CASE_NUMBER_ACTUAL = "LIN2412352133"
-CASE_NUMBER_TEST = "LIN9999106498"
-ACCESS_TOKEN_URL = "https://api-int.uscis.gov/oauth/accesstoken"
-CASE_URL = "https://api-int.uscis.gov/case-status/{}"
+from secrets import CONSUMER_KEY, CONSUMER_KEY_SECRET, ACCESS_TOKEN_URL, CASE_URL, CASE_NUMBER_TEST
 
 
 def get_access_token():
@@ -33,9 +25,9 @@ def get_access_token():
         return None
 
 
-def get_case_status(access_token):
+def get_case_status():
     header = {
-        'Authorization': 'Bearer {}'.format(access_token),
+        'Authorization': 'Bearer {}'.format(os.environ['USCIS_ACCESS_TOKEN']),
         'Accept': 'application/json'
     }
     response = requests.get(CASE_URL.format(CASE_NUMBER_TEST), headers=header)
@@ -55,7 +47,8 @@ def get_case_status(access_token):
 if __name__ == '__main__':
     access_token = get_access_token()
     if access_token is not None:
-        case_status = get_case_status(access_token)
+        os.environ['USCIS_ACCESS_TOKEN'] = access_token
+        case_status = get_case_status()
         if case_status is not None:
             print("CASE STATUS FOR {receipt}: {status}".format(receipt=CASE_NUMBER_TEST, status=case_status))
     else:
