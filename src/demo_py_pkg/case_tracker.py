@@ -1,9 +1,11 @@
 import os
 import json
+import logging
 import requests
 from pprint import pprint
 # from secrets import CASE_URL, ACCESS_TOKEN_URL
 
+logger=logging.getLogger(__name__)
 
 def get_access_token():
     data = {
@@ -15,13 +17,13 @@ def get_access_token():
     if response.status_code == 200:
         response_json = response.json()
         if response_json['status'] == 'approved':
-            print("Access Token Granted")
+            logger.info("Access Token Granted")
             return response_json['access_token']
         else:
-            print("Access Token Denied")
+            logger.debug("Access Token Denied")
             return None
     else:
-        print("Access Token Denied")
+        logger.debug("Access Token Denied")
         return None
 
 
@@ -32,7 +34,7 @@ def get_case_status():
     }
     response = requests.get(os.environ['CASE_URL'].format(os.environ['TEST_CASE_NUMBER']), headers=header)
     if response.status_code == 200:
-        print('Received case status')
+        logger.info('Received case status')
         text_lines = response.text.split('\n')
         for line in text_lines:
             if "current_case_status_text_en" in line:
@@ -40,8 +42,8 @@ def get_case_status():
                 case_status = line.split(':')[1].strip()[1:-2]
                 return case_status
     else:
-        print('Failed to get case status')
-        print(response.text)
+        logger.debug('Failed to get case status')
+        logger.debug(response.text)
         return None
 
 if __name__ == '__main__':
@@ -50,6 +52,6 @@ if __name__ == '__main__':
         os.environ['USCIS_ACCESS_TOKEN'] = access_token
         case_status = get_case_status()
         if case_status is not None:
-            print("CASE STATUS FOR {receipt}: {status}".format(receipt=os.environ['TEST_CASE_NUMBER'], status=case_status))
+            logger.info("CASE STATUS FOR {receipt}: {status}".format(receipt=os.environ['TEST_CASE_NUMBER'], status=case_status))
     else:
-        print("failed to get case status")
+        logger.debug("failed to get case status")
