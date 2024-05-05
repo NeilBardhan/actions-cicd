@@ -1,0 +1,25 @@
+name: "run-script-on-demand"
+on: workflow_dispatch
+jobs:
+    scheduled-job:
+        runs-on: ubuntu-latest
+        timeout-minutes: 120
+        steps:
+            - name: get-code-action
+              uses: actions/checkout@v4
+              with:
+                ref: ${{ github.ref }}
+                fetch-depth: 0
+            - name: run-python
+              run: |
+                make venv
+                make install
+                SUFFIX=$(date '+%m%d%Y%H%M')
+                FILENAME="log-$SUFFIX.txt" && mkdir artifacts
+                chmod u+x scripts/case-tracker.sh
+                ./scripts/case-tracker.sh > artifacts/$FILENAME
+            - name: upload-artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: scheduled-log-files
+                path: artifacts

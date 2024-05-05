@@ -8,10 +8,10 @@ from secrets import CONSUMER_KEY, CONSUMER_KEY_SECRET, ACCESS_TOKEN_URL, CASE_UR
 def get_access_token():
     data = {
     'grant_type': 'client_credentials',
-    'client_id': CONSUMER_KEY,
-    'client_secret': CONSUMER_KEY_SECRET,
+    'client_id': os.environ['CONSUMER_KEY'],
+    'client_secret': os.environ['CONSUMER_KEY_SECRET'],
     }
-    response = requests.post(ACCESS_TOKEN_URL, data=data)
+    response = requests.post(os.environ['ACCESS_TOKEN_URL'], data=data)
     if response.status_code == 200:
         response_json = response.json()
         if response_json['status'] == 'approved':
