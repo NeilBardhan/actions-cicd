@@ -17,7 +17,7 @@ def get_access_token():
     if response.status_code == 200:
         response_json = response.json()
         if response_json['status'] == 'approved':
-            logger.info("Access Token Granted")
+            print("Access Token Granted")
             return response_json['access_token']
         else:
             logger.debug("Access Token Denied")
@@ -34,7 +34,7 @@ def get_case_status():
     }
     response = requests.get(os.environ['CASE_URL'].format(os.environ['TEST_CASE_NUMBER']), headers=header)
     if response.status_code == 200:
-        logger.info('Received case status')
+        print('Received case status')
         text_lines = response.text.split('\n')
         for line in text_lines:
             if "current_case_status_text_en" in line:
@@ -52,6 +52,6 @@ if __name__ == '__main__':
         os.environ['USCIS_ACCESS_TOKEN'] = access_token
         case_status = get_case_status()
         if case_status is not None:
-            logger.info("CASE STATUS FOR {receipt}: {status}".format(receipt=os.environ['TEST_CASE_NUMBER'], status=case_status))
+            print("CASE STATUS FOR {receipt}: {status}".format(receipt=os.environ['TEST_CASE_NUMBER'], status=case_status))
     else:
         logger.debug("failed to get case status")
