@@ -23,7 +23,7 @@ jobs:
                 SUFFIX=$(date '+%m%d%Y%H%M')
                 FILENAME="log-$SUFFIX.txt" && mkdir artifacts
                 chmod u+x scripts/case-tracker.sh
-                ./scripts/case-tracker.sh > artifacts/$FILENAME
+                ./scripts/case-tracker.sh | tee artifacts/$FILENAME
             - name: upload-artifacts
               uses: actions/upload-artifact@v4
               with:
