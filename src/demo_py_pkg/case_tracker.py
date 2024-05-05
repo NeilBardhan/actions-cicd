@@ -3,7 +3,6 @@ import json
 import logging
 import requests
 from pprint import pprint
-# from secrets import CASE_URL, ACCESS_TOKEN_URL
 
 logger=logging.getLogger(__name__)
 

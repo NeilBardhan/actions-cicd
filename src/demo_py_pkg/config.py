@@ -1,0 +1,5 @@
+APP_NAME = "tracker_gc"
+CASE_NUMBER_ACTUAL = "LIN2412352133"
+CASE_NUMBER_TEST = "LIN9999106498"
+ACCESS_TOKEN_URL = "https://api-int.uscis.gov/oauth/accesstoken"
+CASE_URL = "https://api-int.uscis.gov/case-status/{}"
