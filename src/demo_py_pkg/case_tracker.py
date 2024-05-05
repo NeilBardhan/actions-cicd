@@ -30,7 +30,7 @@ def get_case_status():
         'Authorization': 'Bearer {}'.format(os.environ['USCIS_ACCESS_TOKEN']),
         'Accept': 'application/json'
     }
-    response = requests.get(CASE_URL.format(CASE_NUMBER_TEST), headers=header)
+    response = requests.get(CASE_URL.format(os.environ['CASE_NUMBER_TEST']), headers=header)
     if response.status_code == 200:
         print('Received case status')
         text_lines = response.text.split('\n')
@@ -50,6 +50,6 @@ if __name__ == '__main__':
         os.environ['USCIS_ACCESS_TOKEN'] = access_token
         case_status = get_case_status()
         if case_status is not None:
-            print("CASE STATUS FOR {receipt}: {status}".format(receipt=CASE_NUMBER_TEST, status=case_status))
+            print("CASE STATUS FOR {receipt}: {status}".format(receipt=os.environ['CASE_NUMBER_TEST'], status=case_status))
     else:
         print("failed to get case status")
