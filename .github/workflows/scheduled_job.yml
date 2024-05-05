@@ -1,7 +1,7 @@
 name: "run-script-on-schedule"
-on: # workflow_dispatch
-    schedule:
-        - cron: "0 */12 * * 1-5"
+on: workflow_dispatch
+    # schedule:
+    #     - cron: "0 */12 * * 1-5"
 jobs:
     scheduled-job:
         runs-on: ubuntu-latest
