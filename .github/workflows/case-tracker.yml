@@ -16,6 +16,7 @@ jobs:
                 CLIENT_ID_SECRET: ${{ secrets.CONSUMER_KEY_SECRET }}
                 ACCESS_TOKEN_URL: ${{ secrets.ACCESS_TOKEN_URL }}
                 TEST_CASE_NUMBER: ${{ secrets.TEST_CASE_NUMBER }}
+                CASE_URL: "https://api-int.uscis.gov/case-status/{}"
               run: |
                 make venv
                 make install

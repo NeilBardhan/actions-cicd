@@ -2,7 +2,7 @@ import os
 import json
 import requests
 from pprint import pprint
-from secrets import CASE_URL, ACCESS_TOKEN_URL
+# from secrets import CASE_URL, ACCESS_TOKEN_URL
 
 
 def get_access_token():
@@ -30,7 +30,7 @@ def get_case_status():
         'Authorization': 'Bearer {}'.format(os.environ['USCIS_ACCESS_TOKEN']),
         'Accept': 'application/json'
     }
-    response = requests.get(CASE_URL.format(os.environ['TEST_CASE_NUMBER']), headers=header)
+    response = requests.get(os.environ['CASE_URL'].format(os.environ['TEST_CASE_NUMBER']), headers=header)
     if response.status_code == 200:
         print('Received case status')
         text_lines = response.text.split('\n')
