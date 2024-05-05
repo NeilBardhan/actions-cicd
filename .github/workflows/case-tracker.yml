@@ -1,7 +1,5 @@
-name: "run-script-on-schedule"
+name: "run-script-on-demand"
 on: workflow_dispatch
-    # schedule:
-    #     - cron: "0 */12 * * 1-5"
 jobs:
     scheduled-job:
         runs-on: ubuntu-latest
@@ -18,8 +16,8 @@ jobs:
                 make install
                 SUFFIX=$(date '+%m%d%Y%H%M')
                 FILENAME="log-$SUFFIX.txt" && mkdir artifacts
-                chmod u+x scripts/python-runner.sh
-                ./scripts/python-runner.sh > artifacts/$FILENAME
+                chmod u+x scripts/case-tracker.sh
+                ./scripts/case-tracker.sh > artifacts/$FILENAME
             - name: upload-artifacts
               uses: actions/upload-artifact@v4
               with:
