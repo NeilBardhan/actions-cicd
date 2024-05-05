@@ -1,7 +1,7 @@
-name: "run-script-on-demand"
+name: "case-tracker-run-script"
 on: workflow_dispatch
 jobs:
-    scheduled-job:
+    run-case-tracker-job:
         runs-on: ubuntu-latest
         timeout-minutes: 120
         steps:
@@ -11,15 +11,21 @@ jobs:
                 ref: ${{ github.ref }}
                 fetch-depth: 0
             - name: run-python
+              env:
+                CLIENT_ID: ${{ secrets.CONSUMER_KEY }}
+                CLIENT_ID_SECRET: ${{ secrets.CONSUMER_KEY_SECRET }}
+                ACCESS_TOKEN_URL: ${{ secrets.ACCESS_TOKEN_URL }}
+                TEST_CASE_NUMBER: ${{ secrets.TEST_CASE_NUMBER }}
+                CASE_URL: "https://api-int.uscis.gov/case-status/{}"
               run: |
                 make venv
                 make install
                 SUFFIX=$(date '+%m%d%Y%H%M')
                 FILENAME="log-$SUFFIX.txt" && mkdir artifacts
                 chmod u+x scripts/case-tracker.sh
-                ./scripts/case-tracker.sh > artifacts/$FILENAME
+                ./scripts/case-tracker.sh | tee artifacts/$FILENAME
             - name: upload-artifacts
               uses: actions/upload-artifact@v4
               with:
-                name: scheduled-log-files
+                name: case-tracker-log-files
                 path: artifacts
